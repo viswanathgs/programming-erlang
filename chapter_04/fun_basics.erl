@@ -1,5 +1,5 @@
 -module(fun_basics).
--export([map/2, filter/2, test/0]).
+-export([map/2, filter/2, sum/1, test/0]).
 
 map(_, []) -> [];
 map(F, [H|T]) -> [F(H) | map(F, T)].
@@ -13,6 +13,9 @@ filter(Pred, [H|T]) ->
 
 for(Max, Max, F) -> [F(Max)];
 for(I, Max, F) -> [F(I) | for(I+1, Max, F)].
+
+sum([]) -> 0;
+sum([H|T]) -> H + sum(T).
 
 test() ->
   % Funs
@@ -46,5 +49,8 @@ test() ->
 
   % Control abstractions
   [1, 4, 9, 16, 25] = for(1, 5, fun(X) -> X*X end), 
+
+  0 = sum([]),
+  6 = sum([1, 2, 3]),
 
   'tests passed'.
