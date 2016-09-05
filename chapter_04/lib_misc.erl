@@ -1,6 +1,6 @@
 -module(lib_misc).
 -export([test/0, qsort/1, pythag_triplets/1, permutations/1, max1/2,
-         odds_and_evens1/1, odds_and_evens2/1, my_tuple_to_list/1]).
+         odds_and_evens1/1, odds_and_evens2/1]).
 
 % 4.5 List comprehensions / generators
 
@@ -59,15 +59,6 @@ odds_and_evens_acc([H|T], Odds, Evens) ->
 odds_and_evens_acc([], Odds, Evens) -> 
   {lists:reverse(Odds), lists:reverse(Evens)}.
 
-% Exercise 2
-my_tuple_to_list(T) -> tuple_to_list_helper(T, 1).
-
-tuple_to_list_helper(T, Index) ->
-  case Index =< tuple_size(T) of
-    true -> [element(Index, T) | tuple_to_list_helper(T, Index+1)];
-    false -> []
-  end.
-
 test() ->
   [] = qsort([]),
   [1, 2, 3] = qsort([1, 2, 3]),
@@ -85,9 +76,5 @@ test() ->
 
   {[1, 3, 5], [2, 4, 6]} = odds_and_evens1(lists:seq(1, 6)),
   {[1, 3, 5], [2, 4, 6]} = odds_and_evens2(lists:seq(1, 6)),
-
-  [] = my_tuple_to_list({}),
-  [1] = my_tuple_to_list({1}),
-  [1, a, "blah"] = my_tuple_to_list({1, a, "blah"}),
 
   'tests passed'.
